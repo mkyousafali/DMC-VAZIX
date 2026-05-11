@@ -5,13 +5,33 @@
   export let form: ActionData;
 
   let loading = false;
-  let accessCodeRaw = '';
+  let digits: string[] = ['', '', '', '', '', ''];
+  $: accessCode = digits.join('');
 
-  // Only allow digits, max 6
-  function onCodeInput(e: Event) {
+  let boxes: HTMLInputElement[] = [];
+
+  function onDigitInput(i: number, e: Event) {
     const inp = e.target as HTMLInputElement;
-    inp.value = inp.value.replace(/\D/g, '').slice(0, 6);
-    accessCodeRaw = inp.value;
+    const val = inp.value.replace(/\D/g, '').slice(-1);
+    inp.value = val;
+    digits[i] = val;
+    digits = [...digits];
+    if (val && i < 5) boxes[i + 1]?.focus();
+  }
+
+  function onDigitKeydown(i: number, e: KeyboardEvent) {
+    if (e.key === 'Backspace' && !digits[i] && i > 0) {
+      boxes[i - 1]?.focus();
+    }
+  }
+
+  function onDigitPaste(e: ClipboardEvent) {
+    const text = e.clipboardData?.getData('text') ?? '';
+    const nums = text.replace(/\D/g, '').slice(0, 6).split('');
+    nums.forEach((d, i) => { digits[i] = d; });
+    digits = [...digits];
+    boxes[Math.min(nums.length, 5)]?.focus();
+    e.preventDefault();
   }
 </script>
 
@@ -60,20 +80,25 @@
       </div>
 
       <div class="form-group">
-        <label class="form-label" for="access_code">6-Digit Access Code</label>
-        <input
-          id="access_code"
-          name="access_code"
-          type="password"
-          inputmode="numeric"
-          class="form-input code-input"
-          placeholder="• • • • • •"
-          maxlength="6"
-          autocomplete="current-password"
-          required
-          on:input={onCodeInput}
-        />
-        <div class="form-hint">6-digit numeric code only</div>
+        <label class="form-label" for="otp_0">6-Digit Access Code</label>
+        <!-- hidden input carries the joined value for form submission -->
+        <input type="hidden" name="access_code" value={accessCode} />
+        <div class="otp-row" on:paste={onDigitPaste}>
+          {#each digits as digit, i}
+            <input
+              id={i === 0 ? 'otp_0' : undefined}
+              bind:this={boxes[i]}
+              type="password"
+              inputmode="numeric"
+              maxlength="1"
+              class="otp-box"
+              value={digit}
+              autocomplete="off"
+              on:input={(e) => onDigitInput(i, e)}
+              on:keydown={(e) => onDigitKeydown(i, e)}
+            />
+          {/each}
+        </div>
       </div>
 
       <button type="submit" class="btn btn-primary btn-full btn-lg" disabled={loading}>
@@ -146,6 +171,33 @@
     font-size: 1.5rem;
     letter-spacing: 0.3em;
     text-align: center;
+  }
+
+  .otp-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 4px;
+  }
+
+  .otp-box {
+    width: 44px;
+    height: 52px;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    background: rgba(255,255,255,0.85);
+    border: 2px solid rgba(124,111,247,0.30);
+    border-radius: 12px;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    caret-color: transparent;
+  }
+
+  .otp-box:focus {
+    border-color: #7c6ff7;
+    box-shadow: 0 0 0 3px rgba(124,111,247,0.18);
   }
 
   .login-footer {
