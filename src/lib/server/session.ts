@@ -10,7 +10,7 @@ const secret = new TextEncoder().encode(SESSION_SECRET);
 const ALG = 'HS256';
 
 export const SESSION_COOKIE = 'dmc_session';
-const SESSION_EXPIRY = '7d';
+const SESSION_EXPIRY = '30d';
 
 /** Create a signed JWT for the given user */
 export async function createSessionToken(user: SessionUser): Promise<string> {
@@ -46,6 +46,6 @@ export const cookieOptions = (secure: boolean) => ({
   httpOnly: true,
   secure,
   sameSite: 'strict' as const,
-  maxAge: 60 * 60 * 24 * 7, // 7 days
+  maxAge: 60 * 60 * 24 * 30, // 30 days — persistent across browser restarts
   path: '/'
 });
