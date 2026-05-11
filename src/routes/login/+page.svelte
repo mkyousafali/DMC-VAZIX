@@ -69,7 +69,6 @@
           class="form-input code-input"
           placeholder="• • • • • •"
           maxlength="6"
-          pattern="\d{6}"
           autocomplete="current-password"
           required
           on:input={onCodeInput}

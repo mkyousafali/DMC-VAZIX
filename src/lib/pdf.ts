@@ -55,7 +55,7 @@ export async function exportPDF(opts: ReportOptions): Promise<void> {
 
   // User & date range
   doc.setFontSize(9);
-  doc.text(`Patient: ${opts.displayName ?? opts.username}  |  Period: ${formatDate(opts.startDate)} — ${formatDate(opts.endDate)}`, 14, 26);
+  doc.text(`Client: ${opts.displayName ?? opts.username}  |  Period: ${formatDate(opts.startDate)} — ${formatDate(opts.endDate)}`, 14, 26);
 
   let y = 36;
 
@@ -164,7 +164,7 @@ export async function exportPDF(opts: ReportOptions): Promise<void> {
   const allMoods = opts.entries.map((e) => e.mood_rating).filter((r): r is number => r !== null);
   const overallAvg = allMoods.length ? Math.round(allMoods.reduce((a, b) => a + b, 0) / allMoods.length * 10) / 10 : null;
 
-  doc.setFillColor(99, 102, 241, 0.1);
+  doc.setFillColor(255, 255, 255);
   doc.setDrawColor(...indigo);
   doc.roundedRect(10, y, pageW - 20, 28, 3, 3, 'FD');
 

@@ -65,7 +65,7 @@
     <!-- Admin: user picker -->
     {#if data.user.role === 'master_admin' && data.users.length > 0}
       <div class="form-group">
-        <label class="form-label" for="user_select">Patient</label>
+        <label class="form-label" for="user_select">Client</label>
         <select id="user_select" class="form-select" bind:value={selectedUserId}>
           {#each data.users as u}
             <option value={u.id}>{u.display_name ?? u.username}</option>
@@ -96,7 +96,7 @@
       <h3 class="font-semibold mb-md">📋 Report Preview</h3>
       <div class="preview-info">
         <div class="preview-row">
-          <span class="text-muted">Patient</span>
+          <span class="text-muted">Client</span>
           <span>{data.targetUser.display_name ?? data.targetUser.username}</span>
         </div>
         <div class="preview-row">

@@ -23,7 +23,7 @@
 <!-- Top bar -->
 <header class="top-bar">
   <a href="/dashboard" class="brand">
-    <span class="brand-icon">📊</span>
+    <img src="/ico-logo.jpg" alt="DMC-VAZIX" class="brand-logo" />
     <span class="brand-name">DMC-VAZIX</span>
   </a>
 
@@ -86,12 +86,15 @@
     right: 0;
     z-index: 100;
     height: 56px;
-    background: var(--bg-secondary);
-    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(130,110,255,0.20);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 16px;
+    box-shadow: 0 2px 12px rgba(124,111,247,0.10);
   }
 
   .brand {
@@ -101,12 +104,17 @@
     text-decoration: none;
   }
 
-  .brand-icon { font-size: 1.4rem; }
+  .brand-logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
 
   .brand-name {
     font-size: 1.1rem;
     font-weight: 800;
-    color: var(--accent-light);
+    color: var(--accent);
     letter-spacing: -0.02em;
   }
 
@@ -145,11 +153,13 @@
     top: 64px;
     right: 12px;
     z-index: 200;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(130,110,255,0.22);
     border-radius: var(--radius-lg);
     min-width: 200px;
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 8px 32px rgba(124,111,247,0.18);
     overflow: hidden;
     animation: fadeIn 0.12s ease;
   }
@@ -186,7 +196,7 @@
     font-family: var(--font-body);
   }
 
-  .menu-item:hover { background: var(--bg-elevated); }
+  .menu-item:hover { background: rgba(124,111,247,0.08); }
 
   .menu-logout { color: var(--danger); }
 
@@ -198,10 +208,13 @@
     right: 0;
     z-index: 100;
     height: 64px;
-    background: var(--bg-secondary);
-    border-top: 1px solid var(--border);
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(130,110,255,0.20);
     display: flex;
     align-items: stretch;
+    box-shadow: 0 -2px 12px rgba(124,111,247,0.10);
   }
 
   .nav-item {
@@ -217,9 +230,9 @@
     padding: 6px 0;
   }
 
-  .nav-item.active { color: var(--accent-light); }
+  .nav-item.active { color: var(--accent); }
   .nav-item:hover  { color: var(--text-secondary); }
-  .nav-item.active:hover { color: var(--accent-light); }
+  .nav-item.active:hover { color: var(--accent); }
 
   .nav-icon  { font-size: 1.3rem; line-height: 1; }
   .nav-label { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }

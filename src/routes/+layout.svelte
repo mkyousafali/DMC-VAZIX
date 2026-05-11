@@ -4,6 +4,7 @@
   import type { LayoutData } from './$types';
 
   export let data: LayoutData;
+  export let params: Record<string, string> = {};
 </script>
 
 <Nav user={data.user} />

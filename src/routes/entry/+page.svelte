@@ -243,10 +243,11 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
+    align-items: start;
   }
 
   .form-group { margin-bottom: 0; }
-  .form-group + .form-group { margin-top: 16px; }
+  .form-group + .form-group { margin-top: 0; }
 
   @media (max-width: 360px) {
     .row-2 { grid-template-columns: 1fr; }
