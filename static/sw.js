@@ -1,7 +1,7 @@
 // DMC-VAZIX Service Worker
 // Provides offline fallback and caching for the PWA shell.
 
-const CACHE_NAME = 'dmc-vazix-v1';
+const CACHE_NAME = 'dmc-vazix-v3';
 
 // Assets to pre-cache (app shell)
 const SHELL_ASSETS = [
